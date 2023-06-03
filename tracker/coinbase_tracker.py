@@ -2,7 +2,7 @@ from coinbase.wallet.client import Client
 
 class CoinbaseTracker:
     def __init__(self):
-        api_file = open('tracker\\api_keys.txt', 'r')
+        api_file = open('tracker\\coinbase_api_keys.txt', 'r')
         keys = api_file.read().split()
 
         self.api_key = keys[0]
