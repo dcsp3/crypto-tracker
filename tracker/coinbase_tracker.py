@@ -16,9 +16,6 @@ class CoinbaseTracker:
     def currencyToGBP(self, currency):
         price = self.client.get_spot_price(currency_pair=f"{currency}-GBP")
         return float(price.amount)
-    
-    def getCurrencies(self, currency):
-        return 
 
     def getCurrencyValue(self, currency):
         return float(currency.balance.amount) * self.currencyToGBP(currency.currency)
