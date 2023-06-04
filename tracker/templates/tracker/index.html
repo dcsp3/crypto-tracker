@@ -10,6 +10,13 @@
     <h1><center>Crypto Portfolio</center></h1>
     <br>
     <br>
-    <h1><center>Total Portfolio Value: £{{value}}</center></h1>
+
+    <div id="component1">
+        <h1>£{{value}}</h1>
+        {% for pair in currency_value_pairs %}
+            <h3>{{pair.0}}: £{{pair.1}}</h3>
+        {% endfor %}
+    </div>
+
 </body>
 </html>
