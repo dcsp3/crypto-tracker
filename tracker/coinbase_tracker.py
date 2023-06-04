@@ -11,19 +11,22 @@ class CoinbaseTracker:
         self.client = Client(self.api_key, self.api_secret)
         self.accounts = self.client.get_accounts() 
 
-        self.assets = [x for x in self.accounts.data if float(x.balance.amount) > 0.00]
+        self.currencies = [x for x in self.accounts.data if float(x.balance.amount) > 0.00]
 
     def currencyToGBP(self, currency):
         price = self.client.get_spot_price(currency_pair=f"{currency}-GBP")
         return float(price.amount)
+    
+    def getCurrencies(self, currency):
+        return 
 
-    def getWalletValue(self, asset):
-        return float(asset.balance.amount) * self.currencyToGBP(asset.currency)
+    def getCurrencyValue(self, currency):
+        return float(currency.balance.amount) * self.currencyToGBP(currency.currency)
 
     def getTotalPortfolioValue(self):
         total_value = 0.0
 
-        for asset in self.assets:
-            total_value += self.getWalletValue(asset)
+        for currency in self.currencies:
+            total_value += self.getCurrencyValue(currency)
 
         return round(total_value, 2)
