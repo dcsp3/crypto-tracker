@@ -13,12 +13,34 @@ class CoinbaseTracker:
 
         self.currencies = [x for x in self.accounts.data if float(x.balance.amount) > 0.00][::-1]
 
+    def getCurrencyAmount(self, currency):
+        return currency.balance.amount
+    
     def currencyToGBP(self, currency):
         price = self.client.get_spot_price(currency_pair=f"{currency}-GBP")
         return float(price.amount)
 
     def getCurrencyValue(self, currency):
         return float(currency.balance.amount) * self.currencyToGBP(currency.currency)
+    
+    def getCurrencyCostBasis(self, currency):
+        account_id = [x.id for x in self.accounts.data if x.currency == currency.currency][0]
+
+        transactions = self.client.get_transactions(account_id)
+        total_invested = 0.0
+
+        for transaction in transactions.data:
+            if transaction.type == 'buy':
+                native_amount = float(transaction.native_amount.amount)
+                total_invested += native_amount
+        
+        return total_invested
+    
+    def getPnL(self, currency):
+        pass
+
+    def getAllocationPercent(self, currency):
+        pass
     
     def getCurrencyValuePairs(self): 
         currency_value_pairs = []
