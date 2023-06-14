@@ -36,8 +36,8 @@ class CoinbaseTracker:
         
         return total_invested
     
-    def getPnL(self, currency):
-        pass
+    def getCurrencyPnL(self, currency):
+        return self.getCurrencyValue(currency) - self.getCurrencyCostBasis(currency)
 
     def getAllocationPercent(self, currency):
         pass
