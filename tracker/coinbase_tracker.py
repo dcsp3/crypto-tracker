@@ -13,6 +13,8 @@ class CoinbaseTracker:
 
         self.currencies = [x for x in self.accounts.data if float(x.balance.amount) > 0.00][::-1]
 
+        self.tableData = self.getTableData()
+
     def getCurrencyAmount(self, currency):
         return currency.balance.amount
     
@@ -39,7 +41,10 @@ class CoinbaseTracker:
     def getCurrencyPnL(self, currency):
         return self.getCurrencyValue(currency) - self.getCurrencyCostBasis(currency)
 
-    def getAllocationPercent(self, currency):
+    def getCurrencyROIPercent(self, currency):
+        pass
+
+    def getCurrencyAllocationPercent(self, currency):
         pass
     
     def getCurrencyValuePairs(self): 
@@ -49,6 +54,10 @@ class CoinbaseTracker:
             currency_value_pairs.append([i.currency, round(self.getCurrencyValue(i), 2)])
 
         return currency_value_pairs
+    
+    def getTableData(self):
+        pass
+    
 
     def getTotalPortfolioValue(self):
         total_value = 0.0
@@ -57,3 +66,6 @@ class CoinbaseTracker:
             total_value += self.getCurrencyValue(currency)
 
         return round(total_value, 2)
+    
+    def getTotalPnL(self):
+        pass
