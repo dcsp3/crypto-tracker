@@ -1,1 +1,0 @@
-Enter your Coinbase API key and secret key here.
