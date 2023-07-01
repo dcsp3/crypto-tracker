@@ -56,9 +56,22 @@ class CoinbaseTracker:
         return currency_value_pairs
     
     def getTableData(self):
-        pass
-    
+        table_data = []
 
+        for currency in self.currencies:
+            data = {}
+            data["currency"] = currency.currency
+            data["amount"] = self.getCurrencyAmount(currency)
+            data["cost_basis"] = self.getCurrencyCostBasis(currency)
+            data["current_value"] = round(self.getCurrencyValue(currency), 2)
+            data["pnl"] = round(self.getCurrencyPnL(currency), 2)
+            data["roi"] = self.getCurrencyROIPercent(currency)
+            data["allocation"] = self.getCurrencyAllocationPercent(currency)
+
+            table_data.append(data)
+        
+        return table_data
+    
     def getTotalPortfolioValue(self):
         total_value = 0.0
 

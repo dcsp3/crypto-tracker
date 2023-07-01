@@ -39,26 +39,20 @@
                 <th>ROI (%)</th>
                 <th>Allocation (%)</th>
             </tr>
+
+            {% for entry in table_data %}
            
             <tr>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
+                <td>{{entry.currency}}</td>
+                <td>{{entry.amount}}</td>
+                <td>{{entry.cost_basis}}</td>
+                <td>{{entry.current_value}}</td>
+                <td>{{entry.pnl}}</td>
+                <td>{{entry.roi}}</td>
+                <td>{{entry.allocation}}</td>
             </tr>
 
-            <tr>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-            </tr>
+            {% endfor %}
             
         </table>        
     </div>
