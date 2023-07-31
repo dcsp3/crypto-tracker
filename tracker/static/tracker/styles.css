@@ -1,10 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
 body {
-    background-color: whitesmoke;
-    font-family: 'Open Sans', Sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #212121;
+    font-family: 'Poppins', sans-serif;
     font-weight: 200;
+    min-height: 100vh;
+}
+
+#component1 {
+    color: white;
+    background-color: #3d3d3d;
+    border-radius: 10px;
+    width: 20%;
+    padding: 20px
+}
+
+#component1 > #value {
+    text-align: center;
+    font-size: 3rem;
+}
+
+#component1 > #currency {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    position: relative;
+}
+
+#component1 > #currency > img {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: 4px;
+}
+
+#component1 > #currency > #currency-value {
+    position: absolute;
+    right: 0;
+}
+
+#component2 {
+    position:absolute; 
+    height:500px;
+    width:200px; 
 }
 
 table {
+    display: none;
     position: absolute;
     z-index: 2;
     left: 50%;
