@@ -42,10 +42,16 @@ class CoinbaseTracker:
         return self.getCurrencyValue(currency) - self.getCurrencyCostBasis(currency)
 
     def getCurrencyROIPercent(self, currency):
-        pass
+        currency_pnl = self.getCurrencyPnL(currency)
+        currency_cost_basis = self.getCurrencyCostBasis(currency)
+
+        return round((currency_pnl/currency_cost_basis) * 100, 2)
 
     def getCurrencyAllocationPercent(self, currency):
-        pass
+        currency_value = self.getCurrencyValue(currency)
+        total_value = self.getTotalPortfolioValue()
+
+        return round((currency_value/total_value) * 100, 2)
     
     def getCurrencyValuePairs(self): 
         currency_value_pairs = []
@@ -65,8 +71,8 @@ class CoinbaseTracker:
             data["cost_basis"] = self.getCurrencyCostBasis(currency)
             data["current_value"] = round(self.getCurrencyValue(currency), 2)
             data["pnl"] = round(self.getCurrencyPnL(currency), 2)
-            data["roi"] = self.getCurrencyROIPercent(currency)
-            data["allocation"] = self.getCurrencyAllocationPercent(currency)
+            data["roi"] = str(self.getCurrencyROIPercent(currency)) + "%"
+            data["allocation"] = str(self.getCurrencyAllocationPercent(currency)) + "%"
 
             table_data.append(data)
         
