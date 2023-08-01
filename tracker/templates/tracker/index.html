@@ -26,6 +26,23 @@
         </div>
 
         <br>
+
+        <style>
+            .positive-value {
+                color: rgb(3, 168, 3);
+            }
+            .negative-value {
+                color: red;
+            }
+        </style>
+
+        <div id="component4">
+            Total PnL <span id="value" class="{% if totalpnl >= 0 %}positive-value{% else %}negative-value{% endif %}">{{ totalpnl }}</span>
+            <br>
+            Total ROI <span id="value" class="{% if totalroi >= 0 %}positive-value{% else %}negative-value{% endif %}">{{ totalroi }}%</span>
+        </div>  
+
+        <br>
         <br>
 
         <div id="component2">
