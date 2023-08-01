@@ -15,108 +15,112 @@
     <br>
     <br>
 
-
-
-    <div id="component1">
-        <div id="value">£{{value}}</div>
-        <br>
-        <br>
-        {% for pair in currency_value_pairs %}
-            <div id="currency"><img src="{% static 'tracker/'|add:pair.0|add:'.jpg' %}"> {{pair.0}} <span id="currency-value">£{{pair.1}}</span></div>
-        {% endfor %}
-    </div>
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-
-    <div id="component2">
-        <canvas id="chart"></canvas>
-        <script>
-            let ctx = document.getElementById("chart").getContext("2d");
-
-            let chart = new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: ["2020/Q1", "2020/Q2", "2020/Q3", "2020/Q4"],
-                datasets: [
-                    {
-                    label: "Gross volume ($)",
-                    backgroundColor: "#79AEC8",
-                    borderColor: "#417690",
-                    data: [26900, 28700, 27300, 29200]
-                    }
-                ]
-            },
-            options: {
-                title: {
-                    text: "Gross Volume in 2020",
-                    display: true
-                }
-            }
-            });
-        </script>
-    </div>
-    
-
-
-      
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <div id="component3">
-        <table>
- 
-            <tr>
-                <th>Currency</th>
-                <th>Amount</th>
-                <th>Cost Basis (£)</th>
-                <th>Current Value (£) </th>
-                <th>Profit/Loss (£) </th>
-                <th>ROI (%)</th>
-                <th>Allocation (%)</th>
-            </tr>
-
-            {% for entry in table_data %}
-           
-            <tr>
-                <td>{{entry.currency}}</td>
-                <td>{{entry.amount}}</td>
-                <td>{{entry.cost_basis}}</td>
-                <td>{{entry.current_value}}</td>
-                <td>{{entry.pnl}}</td>
-                <td>{{entry.roi}}</td>
-                <td>{{entry.allocation}}</td>
-            </tr>
-
+    <div id="components">
+        <div id="component1">
+            <div id="value">£{{value}}</div>
+            <br>
+            <br>
+            {% for pair in currency_value_pairs %}
+                <div id="currency"><img src="{% static 'tracker/'|add:pair.0|add:'.jpg' %}"> {{pair.0}} <span id="currency-value">£{{pair.1}}</span></div>
             {% endfor %}
+        </div>
+
+        <br>
+        <br>
+
+        <div id="component2">
+            <div id="heading">Portfolio Allocation %</div>
+            <br>
+            <div id="donut-chart">
+                <canvas id="chart1"></canvas>
+                {{ currencies|json_script:"currencies" }}
+                {{ allocations|json_script:"allocations" }}
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const currencies = JSON.parse(document.getElementById('currencies').textContent);
+                        const allocations = JSON.parse(document.getElementById('allocations').textContent);
+
+                        var ctx = document.getElementById("chart1").getContext("2d");
             
-        </table>        
+                        var chart = new Chart(ctx, {
+                            type: "doughnut",
+                            data: {
+                                labels: currencies,
+                                datasets: [
+                                    {
+                                        data: allocations,
+                                        backgroundColor: ['#2a60de', '#F7931A']
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: false,
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+
+
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div id="component3">
+            <table>
+    
+                <tr>
+                    <th>Currency</th>
+                    <th>Amount</th>
+                    <th>Cost Basis (£)</th>
+                    <th>Current Value (£) </th>
+                    <th>Profit/Loss (£) </th>
+                    <th>ROI (%)</th>
+                    <th>Allocation (%)</th>
+                </tr>
+
+                {% for entry in table_data %}
+            
+                <tr>
+                    <td>{{entry.currency}}</td>
+                    <td>{{entry.amount}}</td>
+                    <td>{{entry.cost_basis}}</td>
+                    <td>{{entry.current_value}}</td>
+                    <td>{{entry.pnl}}</td>
+                    <td>{{entry.roi}}</td>
+                    <td>{{entry.allocation}}</td>
+                </tr>
+
+                {% endfor %}
+                
+            </table>        
+        </div>
     </div>
+
 </body>
 </html>
