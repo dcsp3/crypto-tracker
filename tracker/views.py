@@ -9,6 +9,8 @@ def index(request):
     return render(request, "tracker/index.html", {
         "value": tracker.getTotalPortfolioValue(),
         "currency_value_pairs": tracker.getCurrencyValuePairs(),
-        "table_data": tracker.tableData
+        "currencies": [i.currency for i in tracker.currencies][::-1],
+        "allocations": [tracker.getCurrencyAllocationPercent(i) for i in tracker.currencies][::-1],
+        "table_data": tracker.getTableData()
     })
 
