@@ -13,8 +13,6 @@ class CoinbaseTracker:
 
         self.currencies = [x for x in self.accounts.data if float(x.balance.amount) > 0.00][::-1]
 
-        self.tableData = self.getTableData()
-
     def getCurrencyAmount(self, currency):
         return currency.balance.amount
     
