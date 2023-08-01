@@ -85,4 +85,17 @@ class CoinbaseTracker:
         return round(total_value, 2)
     
     def getTotalPnL(self):
-        pass
+        total = 0
+
+        for currency in self.currencies:
+            total += self.getCurrencyPnL(currency)
+
+        return round(total, 2)
+
+    def getTotalROI(self):
+        total = 0
+
+        for currency in self.currencies:
+            total += self.getCurrencyPnL(currency)
+
+        return round(total / len(self.currencies), 2)
