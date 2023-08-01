@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Portfolio Valuation</title>
     <link href="{% static 'tracker/styles.css' %}" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
 </head>
 <body>
     <h1><center>Crypto Portfolio</center></h1>
@@ -32,7 +32,7 @@
             <div id="heading">Portfolio Allocation %</div>
             <br>
             <div id="donut-chart">
-                <canvas id="chart1"></canvas>
+                <canvas id="allocation-chart"></canvas>
                 {{ currencies|json_script:"currencies" }}
                 {{ allocations|json_script:"allocations" }}
 
@@ -41,18 +41,16 @@
                         const currencies = JSON.parse(document.getElementById('currencies').textContent);
                         const allocations = JSON.parse(document.getElementById('allocations').textContent);
 
-                        var ctx = document.getElementById("chart1").getContext("2d");
+                        var ctx = document.getElementById("allocation-chart").getContext("2d");
             
                         var chart = new Chart(ctx, {
                             type: "doughnut",
                             data: {
                                 labels: currencies,
-                                datasets: [
-                                    {
+                                datasets: [{
                                         data: allocations,
                                         backgroundColor: ['#2a60de', '#F7931A']
-                                    }
-                                ]
+                                    }]
                             },
                             options: {
                                 responsive: true,
@@ -66,6 +64,71 @@
                 </script>
             </div>
         </div>
+
+        <br>
+        <br>
+
+        <div id="component3">
+            <div id="heading">Profit Margin</div>
+            <br>
+            <div id="bar-chart">
+                <canvas id="pnl-chart"></canvas>
+                {{ pnl_margins|json_script:"pnl_margins" }}
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const currencies = JSON.parse(document.getElementById('currencies').textContent);
+                        const pnl_margins = JSON.parse(document.getElementById('pnl_margins').textContent);
+
+                        var ctx = document.getElementById("pnl-chart").getContext("2d");
+                        var colour = pnl_margins.map(value => value >= 0 ? 'green' : 'red')
+
+                        var chart = new Chart(ctx, {
+                            type: "bar",
+                            data: {
+                                labels: currencies.reverse(),
+                                datasets: [{
+                                    data: pnl_margins,
+                                    backgroundColor: colour
+                                }],
+                            },
+                            options: {
+                                indexAxis: 'y',
+                                elements: {
+                                    bar: {
+                                        borderWidth: 2,
+                                    }
+                                },
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        display: false,
+                                    },
+                                title: {
+                                    display: false,
+                                    }
+                                },
+                                scales: {
+                                    x: {
+                                        ticks: {
+                                            color: 'white' 
+                                        }
+                                    },
+                                    y: {
+                                        ticks: {
+                                            color: 'white' 
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+
+        <br>
+        <br>
 
 
         
@@ -91,7 +154,7 @@
         <br>
         <br>
 
-        <div id="component3">
+        <div id="component5">
             <table>
     
                 <tr>
