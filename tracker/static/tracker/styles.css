@@ -8,41 +8,54 @@ body {
     min-height: 100vh;
 }
 
-#components {
+.positive-value {
+    color: rgb(3, 168, 3);
+}
+.negative-value {
+    color: red;
 }
 
-#component1 {
+#component-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+}
+
+#value-component {
     color: white;
     background-color: #3d3d3d;
     border-radius: 10px;
-    width: 20%;
+    height: 60%;
+    width: 100%;
+    margin-top: 10%;
     padding: 20px
 }
 
-#component1 > #value {
+#value-component > #value {
     text-align: center;
     font-size: 3rem;
 }
 
-#component1 > #currency {
+#value-component > #currency {
     display: flex;
     align-items: center;
     font-size: 1.5rem;
     position: relative;
 }
 
-#component1 > #currency > img {
+#value-component > #currency > img {
     height: 1.5rem;
     width: 1.5rem;
     margin-right: 4px;
 }
 
-#component1 > #currency > #currency-value {
+#value-component > #currency > #currency-value {
     position: absolute;
     right: 0;
 }
 
-#component2 {
+#allocation-component {
     display: flex;
     flex-direction: column; 
     justify-content: center;
@@ -50,16 +63,16 @@ body {
     background-color: #3d3d3d;
     border-radius: 10px;
     padding: 20px;
-    height: 30%;
-    width: 35%;
+    height: 90%;
+    width: 100%;
 }
 
-#component2 > #heading {
+#allocation-component > #heading {
     color: white;
     font-size: 2rem;
 }
 
-#component3 {
+#margin-component {
     display: flex;
     flex-direction: column; 
     justify-content: center;
@@ -67,30 +80,30 @@ body {
     background-color: #3d3d3d;
     border-radius: 10px;
     padding: 20px;
-    height: 30%;
-    width: 25%;
+    height: 50%;
+    width: 90%;
 }
 
-#component3 > #heading {
+#margin-component > #heading {
     color: white;
     font-size: 2rem;
 }
 
-#component4 {
+#info-component {
     color: white;
     background-color: #3d3d3d;
     border-radius: 10px;
-    width: 20%;
+    width: 90%;
     padding: 20px;
     font-size: 1.5rem
 }
 
-#component4 > #value {
+#info-component > #value {
     float: right;
 }
 
 table {
-    position: absolute;
+    display: none;
     z-index: 2;
     left: 50%;
     top: 50%;
