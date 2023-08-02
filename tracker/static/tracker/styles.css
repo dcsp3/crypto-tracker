@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 body {
-    margin: 40px;
     background-color: #212121;
     font-family: 'Poppins', sans-serif;
     font-weight: 200;
@@ -11,15 +10,37 @@ body {
 .positive-value {
     color: rgb(3, 168, 3);
 }
+
 .negative-value {
     color: red;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-size: 2.5rem;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgb(71, 126, 246);
+}
+
+#navbar > #heading {
+    margin-left: 1.5rem;
+}
+
+#page-container {
+    margin: 3rem 1rem 0 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
 #component-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 2rem;
+    column-gap: 2rem;
 }
 
 #value-component {
@@ -102,17 +123,19 @@ body {
     float: right;
 }
 
+#table-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
 table {
-    display: none;
-    z-index: 2;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
     width: 80%; 
     border-collapse: collapse;
     border-spacing: 0;
     box-shadow: 0 2px 15px rgba(64,64,64,.7);
-    border-radius: 12px 12px 0 0;
+    border-radius: 12px 12px 12px 12px;
     overflow: hidden;
 }
 
